@@ -7,6 +7,7 @@ use std::{
 
 use anyhow::anyhow;
 use comemo::Prehashed;
+use log::debug;
 use typst::{
     diag::{FileError, FileResult},
     eval::Tracer,
@@ -131,7 +132,8 @@ impl World for DummyWorld {
         Err(FileError::AccessDenied)
     }
 
-    fn file(&self, _id: FileId) -> FileResult<Bytes> {
+    fn file(&self, id: FileId) -> FileResult<Bytes> {
+        debug!("File requested: {id:?}");
         Err(FileError::AccessDenied)
     }
 
